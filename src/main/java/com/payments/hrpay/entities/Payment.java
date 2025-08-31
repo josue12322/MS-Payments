@@ -1,23 +1,30 @@
 package com.payments.hrpay.entities;
 
-import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
-import jakarta.persistence.Table;
 import lombok.Data;
-import org.hibernate.annotations.AttributeBinderType;
+import lombok.NoArgsConstructor;
 
 @Data
-@Entity
-@Table(name = "payments")
 public class Payment {
-
-    @Id
     private Long id;
+    private String name;
     private Double dailyIncome;
     private Integer days;
+    private Double tatalDays;
 
+    public Payment() {
+
+    }
+    public Payment(String name, Double dailyIncome, Integer days) {
+        super();
+        this.name = name;
+        this.dailyIncome = dailyIncome;
+        this.days = days;
+        this.tatalDays = getTotal();
+    }
 
     private Double getTotal(){
-        return dailyIncome * days;
+        tatalDays = dailyIncome * days;
+        return tatalDays;
     }
 }
